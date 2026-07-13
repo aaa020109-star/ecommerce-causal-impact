@@ -12,6 +12,8 @@ This project uses **Causal Impact analysis** to isolate the true effect of a Bla
 - **Campaign Event**: Black Friday campaign starting 2010-11-01
 
 ## Key Findings
+
+### Method 1: CausalImpact (Bayesian Structural Time Series)
 | Metric | Value |
 |--------|-------|
 | Pre-campaign daily avg revenue | £30,757 |
@@ -21,8 +23,19 @@ This project uses **Causal Impact analysis** to isolate the true effect of a Bla
 | P-value | 0.1% |
 | Probability of causal effect | 99.9% |
 
-> The naive comparison overstated the campaign effect by ~20%.  
-> After controlling for trend, the true causal effect was +3.0% — statistically significant at the 99.9% level.
+### Method 2: Difference-in-Differences (DiD)
+| Metric | Value |
+|--------|-------|
+| Treatment group | UK customers |
+| Control group | Non-UK customers |
+| **DiD estimate (daily)** | **+£4,936** |
+| P-value | 0.37% |
+| Statistical significance | ✅ Significant (p<0.05) |
+
+### Robustness Check
+> Both methods confirm the campaign had a **statistically significant positive effect** on revenue.  
+> The naive before-after comparison (+23.5%) overstated the true effect — most of the increase was driven by seasonal trends, not the campaign itself.
+
 
 ## Why This Matters
 Without causal inference, marketers risk:
@@ -41,6 +54,7 @@ Without causal inference, marketers risk:
 ![Daily Revenue](fig_01_daily_revenue.png)
 ![Causal Impact](fig_02_causal_impact.png)
 ![Monthly Effect](fig_03_monthly_effect.png)
+![DiD Analysis](fig_04_did_analysis.png)
 
 ## Limitations
 - Single covariate (7-day MA) may not fully capture external confounders
